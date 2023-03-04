@@ -17,15 +17,17 @@ export default function App() {
   ));
 
   function handleClick() {
-    console.log('you clicked');
-
     setDice(allNewDice());
   }
 
   return (
     <main>
       <div className="dice-container">{diceElements}</div>
-      {<button onClick={handleClick}>Roll</button>}
+      {
+        <button className="roll-dice" onClick={handleClick}>
+          Roll
+        </button>
+      }
     </main>
   );
 }
