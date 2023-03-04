@@ -18,11 +18,21 @@ export default function App() {
   }
 
   const diceElements = dice.map((die) => (
-    <Die value={die.value} key={die.id} isHeld={die.isHeld} />
+    <Die
+      value={die.value}
+      key={die.id}
+      isHeld={die.isHeld}
+      id={die.id}
+      holdDice={holdDice}
+    />
   ));
 
   function handleClick() {
     setDice(allNewDice());
+  }
+
+  function holdDice(id) {
+    console.log(id);
   }
 
   return (
