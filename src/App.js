@@ -22,8 +22,7 @@ export default function App() {
       value={die.value}
       key={die.id}
       isHeld={die.isHeld}
-      id={die.id}
-      holdDice={holdDice}
+      holdDice={() => holdDice(die.id)}
     />
   ));
 
