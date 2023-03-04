@@ -16,9 +16,16 @@ export default function App() {
     <Die value={die} key={index} />
   ));
 
+  function handleClick() {
+    console.log('you clicked');
+
+    setDice(allNewDice());
+  }
+
   return (
     <main>
       <div className="dice-container">{diceElements}</div>
+      {<button onClick={handleClick}>Roll</button>}
     </main>
   );
 }
