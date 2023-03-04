@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Die from './Die';
 
 export default function App() {
-  const [dice, setDice] = useState(allNewDice());
+  const [dice, setDice] = useState({ value: allNewDice(), isHeld: false });
 
   function allNewDice() {
     const newDice = [];
@@ -12,12 +12,12 @@ export default function App() {
     return newDice;
   }
 
-  const diceElements = dice.map((die, index) => (
+  const diceElements = dice.value.map((die, index) => (
     <Die value={die} key={index} />
   ));
 
   function handleClick() {
-    setDice(allNewDice());
+    setDice({ value: allNewDice(), isHeld: false });
   }
 
   return (
