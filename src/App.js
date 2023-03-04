@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Die from './Die';
 
 export default function App() {
-  const [newNumbers, setNewNumbers] = useState(allNewDice());
- 
+  const [dice, setDice] = useState(allNewDice());
+
   function allNewDice() {
     const newDice = [];
     for (let i = 0; i < 10; i++) {
@@ -12,13 +12,13 @@ export default function App() {
     return newDice;
   }
 
+  const diceElements = dice.map((die, index) => (
+    <Die value={die} key={index} />
+  ));
+
   return (
     <main>
-      <div className="dice-container">
-        {newNumbers.map((num, index) => {
-          return <Die value={num} key={index} />;
-        })}
-      </div>
+      <div className="dice-container">{diceElements}</div>
     </main>
   );
 }
