@@ -4,10 +4,16 @@ import { nanoid } from 'nanoid';
 
 export default function App() {
   const [dice, setDice] = useState(allNewDice());
-  const [winner, setWinner] = useState(false);
+  const [isWinner, setIsWinner] = useState(false);
 
   useEffect(() => {
-    console.log('Dice state changed');
+    const allHeld = dice.every((die) => die.isHeld);
+    const firstValue = dice[0].value;
+    const allSameValue = dice.every((die) => die.value === firstValue);
+    if (allHeld && allSameValue) {
+      setIsWinner(true);
+      console.log('You won!');
+    }
   }, [dice]);
 
   function generateNewDie() {
