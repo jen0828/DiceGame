@@ -13,7 +13,6 @@ export default function App() {
     const allSameValue = dice.every((die) => die.value === firstValue);
     if (allHeld && allSameValue) {
       setIsWinner(true);
-      console.log('You won!');
     }
   }, [dice]);
 
@@ -34,11 +33,16 @@ export default function App() {
   }
 
   function handleClick() {
-    setDice((oldDice) =>
-      oldDice.map((die) => {
-        return die.isHeld ? die : generateNewDie();
-      })
-    );
+    if (!isWinner) {
+      setDice((oldDice) =>
+        oldDice.map((die) => {
+          return die.isHeld ? die : generateNewDie();
+        })
+      );
+    } else {
+      setIsWinner(false);
+      setDice(allNewDice());
+    }
   }
 
   function holdDice(id) {
