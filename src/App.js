@@ -60,6 +60,7 @@ export default function App() {
 
   return (
     <main>
+      {isWinner && <Confetti />}
       <h1 className="title">Roll the dice! 🎲</h1>
       <p className="instructions">
         Roll until all dice are the same. Click each die to freeze it at its
