@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Die from './Die';
 import { nanoid } from 'nanoid';
+import Confetti from 'react-confetti';
 
 export default function App() {
   const [dice, setDice] = useState(allNewDice());
@@ -66,7 +67,7 @@ export default function App() {
       </p>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-dice" onClick={handleClick}>
-        Roll
+        {isWinner ? 'New Game' : ' Roll'}
       </button>
     </main>
   );
