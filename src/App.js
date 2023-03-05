@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Die from './Die';
 import { nanoid } from 'nanoid';
 
 export default function App() {
   const [dice, setDice] = useState(allNewDice());
+  const [winner, setWinner] = useState(false);
+
+  useEffect(() => {
+    console.log('Dice state changed');
+  }, [dice]);
 
   function generateNewDie() {
     return {
