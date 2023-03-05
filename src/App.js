@@ -60,7 +60,7 @@ export default function App() {
       setIsGameWon(false);
       setDice(allNewDice());
       setNumOfRolls(0);
-      setTimeElapsed(0); // reset the timeElapsed state to 0 when the game is started
+      setTimeElapsed(0); 
     }
   }
 
