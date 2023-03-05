@@ -5,15 +5,29 @@ import Confetti from 'react-confetti';
 
 export default function App() {
   const [dice, setDice] = useState(allNewDice());
-  const [isWinner, setIsWinner] = useState(false);
+  const [isGameWon, setIsGameWon] = useState(false);
   const [numOfRolls, setNumOfRolls] = useState(0);
+  const [isGameStarted, setIsGameStarted] = useState(false);
+  const [timeElapsed, setTimeElapsed] = useState(0);
+
+  useEffect(() => {
+    let timerId;
+    if (isGameStarted && !isGameWon) {
+      timerId = setInterval(() => {
+        setTimeElapsed((prevTimeElapsed) => prevTimeElapsed + 1);
+      }, 1000);
+    }
+    return () => {
+      clearInterval(timerId);
+    };
+  }, [isGameStarted, isGameWon]);
 
   useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
     const allSameValue = dice.every((die) => die.value === firstValue);
     if (allHeld && allSameValue) {
-      setIsWinner(true);
+      setIsGameWon(true);
     }
   }, [dice]);
 
@@ -34,7 +48,8 @@ export default function App() {
   }
 
   function handleClick() {
-    if (!isWinner) {
+    if (!isGameWon) {
+      setIsGameStarted(true);
       setNumOfRolls((prev) => prev + 1);
       setDice((oldDice) =>
         oldDice.map((die) => {
@@ -42,7 +57,7 @@ export default function App() {
         })
       );
     } else {
-      setIsWinner(false);
+      setIsGameWon(false);
       setDice(allNewDice());
       setNumOfRolls(0);
     }
@@ -67,14 +82,17 @@ export default function App() {
 
   return (
     <main>
-      {isWinner && <Confetti />}
+      {isGameWon && <Confetti />}
       <h1 className="title">Roll the dice! 🎲</h1>
-      <p className="instructions">Roll until all dice are the same</p>
+      <p className="instructions">
+        Roll until all dice are the same. Click 'Start Game' button to start.
+      </p>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-dice" onClick={handleClick}>
-        {isWinner ? 'New Game' : ' Roll'}
+        {!isGameStarted || isGameWon ? 'Start Game' : 'Roll'}
       </button>
       <h3>Total: {numOfRolls}</h3>
+      {isGameWon && <div>You won in {timeElapsed} seconds!</div>}
     </main>
   );
 }
