@@ -66,10 +66,7 @@ export default function App() {
     <main>
       {isWinner && <Confetti />}
       <h1 className="title">Roll the dice! 🎲</h1>
-      <p className="instructions">
-        Roll until all dice are the same. Click each die to freeze it at its
-        current value between rolls.
-      </p>
+      <p className="instructions">Roll until all dice are the same</p>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-dice" onClick={handleClick}>
         {isWinner ? 'New Game' : ' Roll'}
