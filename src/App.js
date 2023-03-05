@@ -60,6 +60,7 @@ export default function App() {
       setIsGameWon(false);
       setDice(allNewDice());
       setNumOfRolls(0);
+      setTimeElapsed(0); // reset the timeElapsed state to 0 when the game is started
     }
   }
 
@@ -91,7 +92,8 @@ export default function App() {
       <button className="roll-dice" onClick={handleClick}>
         {!isGameStarted || isGameWon ? 'Start Game' : 'Roll'}
       </button>
-      <h3>Total: {numOfRolls}</h3>
+      <h3>Number of Rolls: {numOfRolls}</h3>
+      <h3>Time: {timeElapsed} in sec</h3>
       {isGameWon && <div>You won in {timeElapsed} seconds!</div>}
     </main>
   );
