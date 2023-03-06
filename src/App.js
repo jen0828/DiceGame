@@ -104,8 +104,8 @@ export default function App() {
       <button className="roll-dice" onClick={handleClick}>
         {!isGameStarted || isGameWon ? 'Start Game' : 'Roll'}
       </button>
-      <h3>Number of Rolls: {numOfRolls}</h3>
-      <h3>Time: {timeElapsed} in sec</h3>
+      <h3 className="instructions">Number of Rolls: {numOfRolls}</h3>
+      <h3 className="instructions">Time: {timeElapsed} in sec</h3>
       {isGameWon && <div>You won in {timeElapsed} seconds!</div>}
     </main>
   );
