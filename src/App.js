@@ -9,6 +9,8 @@ export default function App() {
   const [numOfRolls, setNumOfRolls] = useState(0);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState(0);
+  const retrievedArray = JSON.parse(localStorage.getItem('finalTimes')) || [];
+  const myTopTimeRecord = Math.min(...retrievedArray);
 
   useEffect(() => {
     let timerId;
@@ -26,10 +28,19 @@ export default function App() {
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
     const allSameValue = dice.every((die) => die.value === firstValue);
+
+    function storeRecord(time) {
+      const finalTimes = JSON.parse(localStorage.getItem('finalTimes') || '[]');
+      finalTimes.push(time);
+      localStorage.setItem('finalTimes', JSON.stringify(finalTimes));
+      return finalTimes;
+    }
+
     if (allHeld && allSameValue) {
       setIsGameWon(true);
+      storeRecord(timeElapsed);
     }
-  }, [dice]);
+  }, [dice, timeElapsed]);
 
   function generateNewDie() {
     return {
@@ -60,7 +71,7 @@ export default function App() {
       setIsGameWon(false);
       setDice(allNewDice());
       setNumOfRolls(0);
-      setTimeElapsed(0); 
+      setTimeElapsed(0);
     }
   }
 
@@ -85,6 +96,7 @@ export default function App() {
     <main>
       {isGameWon && <Confetti />}
       <h1 className="title">Roll the dice! 🎲</h1>
+      {isGameWon && <p>Top record: {myTopTimeRecord} sec</p>}
       <p className="instructions">
         Roll until all dice are the same. Click 'Start Game' button to start.
       </p>
