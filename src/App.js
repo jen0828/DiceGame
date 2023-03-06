@@ -9,7 +9,7 @@ export default function App() {
   const [numOfRolls, setNumOfRolls] = useState(0);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [timeElapsed, setTimeElapsed] = useState(0);
-  const retrievedArray = JSON.parse(localStorage.getItem('finalTimes')) || [];
+  const retrievedArray = JSON.parse(localStorage.getItem('finalTimes') || '[]');
   const myTopTimeRecord = Math.min(...retrievedArray);
 
   useEffect(() => {
