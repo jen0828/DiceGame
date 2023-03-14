@@ -1,5 +1,5 @@
 describe('game app', () => {
-  it('plays the game successfully', () => {
+  it('UI tests', () => {
     cy.visit('http://localhost:3000/');
 
     // Confirm that the game title and instructions are displayed
